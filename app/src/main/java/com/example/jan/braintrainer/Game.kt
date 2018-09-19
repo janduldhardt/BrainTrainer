@@ -63,8 +63,49 @@ class Game : AppCompatActivity() {
 
     }
 
+
+
     private fun generateQuestion() {
         answers.clear()
+        val rand = Random()
+        var operationNo = rand.nextInt(3)
+        if (operationNo == 0) {
+            additionQuestion()
+        }
+        else if (operationNo == 1) {
+        subtractionQuestion()
+        }
+        else if (operationNo == 2) {
+            multiQuestion()
+        }
+
+    }
+
+
+    private fun gameTimer() {
+        object : CountDownTimer(30000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                textViewCounterTime.setText(""+millisUntilFinished / 1000 + "s")
+            }
+
+            override fun onFinish() {
+                startResultActivity()
+
+
+            }
+        }.start()
+    }
+
+    fun startResultActivity() {
+        val intent = Intent(this@Game, Result::class.java).apply {
+            putExtra(EXTRA_MESSAGE, score.toString())
+            putExtra(EXTRA_MESSAGE2, numberOfQuestions.toString())
+        }
+        startActivity(intent)
+    }
+
+    fun additionQuestion() {
         val rand = Random()
 
         var a = rand.nextInt(21)
@@ -93,28 +134,62 @@ class Game : AppCompatActivity() {
         btnAnswer4.setText(Integer.toString(answers.get(3)))
     }
 
+    fun subtractionQuestion() {
+        val rand = Random()
 
-    private fun gameTimer() {
-        object : CountDownTimer(30000, 1000) {
+        var a = rand.nextInt(21)
+        var b = rand.nextInt(21)
 
-            override fun onTick(millisUntilFinished: Long) {
-                textViewCounterTime.setText(""+millisUntilFinished / 1000 + "s")
+        sumAnswer = a - b
+        textView.setText("$a - $b")
+        locationCorrectAnswer = rand.nextInt(4)
+
+        for (i in 0..3) {
+            if (i == locationCorrectAnswer) {
+                answers.add(sumAnswer)
+            } else {
+                var incorrectAnswer = rand.nextInt(81) - 40
+                while (incorrectAnswer == sumAnswer) {
+                    incorrectAnswer = rand.nextInt(81) -40
+
+                }
+                answers.add(incorrectAnswer)
             }
 
-            override fun onFinish() {
-                startResultActivity()
-
-
-            }
-        }.start()
+        }
+        btnAnswer1.setText(Integer.toString(answers.get(0)))
+        btnAnswer2.setText(Integer.toString(answers.get(1)))
+        btnAnswer3.setText(Integer.toString(answers.get(2)))
+        btnAnswer4.setText(Integer.toString(answers.get(3)))
     }
 
-    fun startResultActivity() {
-        val intent = Intent(this@Game, Result::class.java).apply {
-            putExtra(EXTRA_MESSAGE, score.toString())
-            putExtra(EXTRA_MESSAGE2, numberOfQuestions.toString())
+    fun multiQuestion() {
+        val rand = Random()
+
+        var a = rand.nextInt(11)
+        var b = rand.nextInt(11)
+
+        sumAnswer = a * b
+        textView.setText("$a * $b")
+        locationCorrectAnswer = rand.nextInt(4)
+
+        for (i in 0..3) {
+            if (i == locationCorrectAnswer) {
+                answers.add(sumAnswer)
+            } else {
+                var incorrectAnswer = rand.nextInt(101)
+                while (incorrectAnswer == sumAnswer) {
+                    incorrectAnswer = rand.nextInt(101)
+
+                }
+                answers.add(incorrectAnswer)
+            }
+
         }
-        startActivity(intent)
+        btnAnswer1.setText(Integer.toString(answers.get(0)))
+        btnAnswer2.setText(Integer.toString(answers.get(1)))
+        btnAnswer3.setText(Integer.toString(answers.get(2)))
+        btnAnswer4.setText(Integer.toString(answers.get(3)))
     }
 
 

@@ -8,23 +8,27 @@
 
     <Button
         android:id="@+id/btnAnswer3"
-        android:layout_width="127dp"
-        android:layout_height="127dp"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:onClick="chooseAnswer"
         android:text="Button"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnAnswer4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnswer1" />
 
     <Button
         android:id="@+id/btnAnswer4"
-        android:layout_width="127dp"
-        android:layout_height="127dp"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:onClick="chooseAnswer"
         android:text="Button"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnswer2" />
 
@@ -32,7 +36,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="91dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:text="45 + 33"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -70,23 +74,27 @@
 
     <Button
         android:id="@+id/btnAnswer1"
-        android:layout_width="127dp"
-        android:layout_height="127dp"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="80dp"
         android:onClick="chooseAnswer"
         android:text="Button"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnAnswer2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btnAnswer2"
-        android:layout_width="127dp"
-        android:layout_height="127dp"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="80dp"
         android:onClick="chooseAnswer"
         android:text="Button"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
