@@ -1,6 +1,7 @@
 package com.example.jan.braintrainer
 
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,6 +9,10 @@ import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
+
+const val EXTRA_MESSAGE = "com.example.jan.braintrainer.Score"
+const val EXTRA_MESSAGE2 = "com.example.jan.braintrainer.NumberQuestions"
+
 
 
 class Game : AppCompatActivity() {
@@ -23,6 +28,7 @@ class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        textView2.setText("")
         btnAnswer1.setTag(0)
         btnAnswer2.setTag(1)
         btnAnswer3.setTag(2)
@@ -44,12 +50,14 @@ class Game : AppCompatActivity() {
             numberOfQuestions++
             textViewScore.setText("$score / $numberOfQuestions")
             textView2.setText("Correct")
+            textView2.setTextColor(Color.parseColor("#2ac075"))
 
         } else {
             generateQuestion()
             numberOfQuestions++
             textViewScore.setText("$score / $numberOfQuestions")
             textView2.setText("Wrong")
+            textView2.setTextColor(Color.parseColor("#f06261"))
         }
 
 
@@ -83,11 +91,8 @@ class Game : AppCompatActivity() {
         btnAnswer2.setText(Integer.toString(answers.get(1)))
         btnAnswer3.setText(Integer.toString(answers.get(2)))
         btnAnswer4.setText(Integer.toString(answers.get(3)))
-
-
-
-
     }
+
 
     private fun gameTimer() {
         object : CountDownTimer(30000, 1000) {
@@ -97,10 +102,19 @@ class Game : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                val intent1 = Intent(this@Game, ResultActivity::class.java)
-                startActivity(intent1)
+                startResultActivity()
+
+
             }
         }.start()
+    }
+
+    fun startResultActivity() {
+        val intent = Intent(this@Game, Result::class.java).apply {
+            putExtra(EXTRA_MESSAGE, score.toString())
+            putExtra(EXTRA_MESSAGE2, numberOfQuestions.toString())
+        }
+        startActivity(intent)
     }
 
 
