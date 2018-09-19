@@ -68,7 +68,7 @@ class Game : AppCompatActivity() {
     private fun generateQuestion() {
         answers.clear()
         val rand = Random()
-        var operationNo = rand.nextInt(3)
+        var operationNo = rand.nextInt(4)
         if (operationNo == 0) {
             additionQuestion()
         }
@@ -77,6 +77,9 @@ class Game : AppCompatActivity() {
         }
         else if (operationNo == 2) {
             multiQuestion()
+        }
+        else if (operationNo == 3) {
+            divideQuestion()
         }
 
     }
@@ -180,6 +183,39 @@ class Game : AppCompatActivity() {
                 var incorrectAnswer = rand.nextInt(101)
                 while (incorrectAnswer == sumAnswer) {
                     incorrectAnswer = rand.nextInt(101)
+
+                }
+                answers.add(incorrectAnswer)
+            }
+
+        }
+        btnAnswer1.setText(Integer.toString(answers.get(0)))
+        btnAnswer2.setText(Integer.toString(answers.get(1)))
+        btnAnswer3.setText(Integer.toString(answers.get(2)))
+        btnAnswer4.setText(Integer.toString(answers.get(3)))
+    }
+
+    fun divideQuestion() {
+        val rand = Random()
+
+        var a = rand.nextInt(11)
+        var b = rand.nextInt(11)
+        var c = a*b
+
+
+
+
+        sumAnswer = a * b
+        textView.setText("$c / $b")
+        locationCorrectAnswer = rand.nextInt(4)
+
+        for (i in 0..3) {
+            if (i == locationCorrectAnswer) {
+                answers.add(a)
+            } else {
+                var incorrectAnswer = rand.nextInt(11)
+                while (incorrectAnswer == a) {
+                    incorrectAnswer = rand.nextInt(11)
 
                 }
                 answers.add(incorrectAnswer)
